@@ -5,8 +5,12 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const url = window.location.href;
-  console.log(url);
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const currentTab = tabs[0];
+      const url = currentTab.url;
+      console.log(url);
+  });
+;
   return (
     <>
       <div>
