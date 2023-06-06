@@ -1,17 +1,35 @@
-import { useState } from 'react'
+ /*global chrome*/
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import axios from 'axios'
+
+interface Tab {
+  url: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const currentTab = tabs[0];
-      const url = currentTab.url;
+  const [url, setUrl] = useState<string | null>(null);
+  
+  const getCurrentTabUrl = () => {
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+      let url = tabs[0].url;
       console.log(url);
-  });
-;
-  return (
+      url != undefined ? setUrl(url) : setUrl("not working");
+    });}
+
+  async function getVideoLink() {
+    const API_KEY = 'AIzaSyANwbxkCRYL8rPDHskTlh0-j2qX3t3VoXs'
+    const videoId = new URL(url).searchParams.get('v');
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
+  
+    const response = await axios.get(apiUrl);
+    const videoLink = response.data.items[0].snippet.thumbnails.default.url;
+    console.log(videoLink);
+  }
+
+   return (
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -23,12 +41,12 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={getCurrentTabUrl}>tab is {url}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> is this working ${url}
+          Edit <code>src/App.tsx</code> is this working; 
         </p>
+        <button onClick={getVideoLink}>Get the video URL</button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
