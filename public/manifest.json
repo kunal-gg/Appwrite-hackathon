@@ -3,7 +3,7 @@
     "version":"1.0.0",
     "manifest_version":3, 
     "action":{
-        "default_popup":"index.html" //this ensures that the extension will load index.html file at the start.
+        "default_popup":"index.html" 
     },
     "permissions": [
     "tabs"
