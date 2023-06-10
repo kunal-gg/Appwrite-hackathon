@@ -5,12 +5,10 @@ import './App.css'
 import { useState } from 'react'
 import axios from 'axios'
 
-interface Tab {
-  url: string;
-}
+
 
 function App() {
-  const [url, setUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState("");
   
   const getCurrentTabUrl = () => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
