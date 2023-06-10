@@ -6,13 +6,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -28,30 +29,30 @@ const Dashboard = (props) => {
   };
 
   const drawer = (
-    <div>
+    <div className="Drawer-drawer">
       <Toolbar />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+        {["Dashboard", "Logout"].map((text, index) => (
+          <ListItem className="ListItem" key={text} disablePadding>
+            <ListItemButton className="ListItemButton">
+              <ListItemIcon style={{ color: "#4C4EF0", fontSize: "2rem" }}>
+                {index % 2 === 0 ? <DashboardTwoToneIcon /> : <LogoutIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+        {["Join our community"].map((text, index) => (
+          <ListItem className="ListItem" key={text} disablePadding>
+            <ListItemButton className="ListItemButton">
+              <ListItemIcon style={{ color: "#4C4EF0", fontSize: "2rem" }}>
+                <InstagramIcon/>
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
           </ListItem>
         ))}
@@ -85,18 +86,18 @@ const Dashboard = (props) => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography className="Typography-logo">
-                Dashboard
-              </Typography>
+              <Typography className="Typography-logo">Dashboard</Typography>
             </Toolbar>
           </AppBar>
           <Box
+            className="Box-drawer"
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders"
           >
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Drawer
+              className="Drawer-drawer"
               container={container}
               variant="temporary"
               open={mobileOpen}
@@ -115,6 +116,7 @@ const Dashboard = (props) => {
               {drawer}
             </Drawer>
             <Drawer
+              className="Drawer-drawer"
               variant="permanent"
               sx={{
                 display: { xs: "none", sm: "block" },
@@ -129,6 +131,7 @@ const Dashboard = (props) => {
             </Drawer>
           </Box>
           <Box
+            className="Box-main"
             component="main"
             sx={{
               flexGrow: 1,

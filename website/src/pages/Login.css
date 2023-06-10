@@ -3,10 +3,11 @@ html {
 }
 
 .login-mainContainer {
-  background: url(https://images.unsplash.com/photo-1640904422940-f3070d65ae29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80)
+  /* background: url(https://images.unsplash.com/photo-1640904422940-f3070d65ae29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80)
     no-repeat center center fixed;
   background-size: cover;
-  backdrop-filter: brightness(0.5);
+  backdrop-filter: brightness(0.5); */
+  background-color: #171B1E;
   height: 100vh;
   display: flex;
   justify-content: center;

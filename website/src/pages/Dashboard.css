@@ -3,27 +3,62 @@ html{
 }
 
 .dashboard-mainContainer{
-    background-color: #171717;
+    background-color: #171B1E;
 }
 
 .dashboard-container{
-    background-color: #171717;
+    background-color: #171B1E;
 }
 
 .AppBar-top{
-    background-color: #171717;
+    background-color: #171B1E;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     color: #ffffff;
+    border: none;
 }
 
 .Toolbar-top{
-    background-color: #171717;
+    background-color: #171B1E;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     color: #ffffff;
+    border: none;
 }
 
 .Typography-logo{
     padding: 1.5rem 0;
     font-size: 2rem;
     font-weight: 100;
+}
+
+.Box-drawer{
+    background-color: #171B1E;
+    color: #ffffff;
+    border: none;
+}
+
+.Drawer-drawer{
+    background-color: #171B1E;
+    color: #ffffff;
+    height: 100%;
+    border: none;
+}
+
+.ListItemText-sidebar{
+    font-size: 1.5rem;
+}
+
+.ListItem:hover{
+    background-color: #28272F;
+}
+
+.ListItemButton{
+    display: flex;
+    flex-direction: row;
+}
+
+.Box-main{
+    background-color: #28272F;
+    color: #ffffff;
+    border: none;
+    height: 100vh;
 }
