@@ -84,7 +84,7 @@ const Dashboard = (props) => {
         "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=415&q=80",
       title: "Polo Shirt",
       subtitle: "$20.00",
-      caption: "most popular",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
     },
     {
       id: 2,
@@ -92,7 +92,7 @@ const Dashboard = (props) => {
         "https://plus.unsplash.com/premium_photo-1671656349262-1e1d3e09735c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
       title: "Shirt",
       subtitle: "$40.00",
-      caption: "Ranveer singh",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
     },
     {
       id: 3,
@@ -100,7 +100,7 @@ const Dashboard = (props) => {
         "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80",
       title: "Pant",
       subtitle: "$15.00",
-      caption: "most popular",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
     },
     {
       id: 4,
@@ -108,7 +108,7 @@ const Dashboard = (props) => {
         "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
       title: "Shoes",
       subtitle: "$50.00",
-      caption: "most styles",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
     },
   ];
 
@@ -138,7 +138,9 @@ const Dashboard = (props) => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography className="Typography-logo">Dashboard</Typography>
+              <Typography className="Typography-logo">
+                <p>Dashboard</p>
+              </Typography>
             </Toolbar>
           </AppBar>
           <Box
@@ -191,8 +193,18 @@ const Dashboard = (props) => {
               width: { sm: `calc(100% - ${drawerWidth}px)` },
             }}
           >
-            <Typography className="Typography-content">
-              <p>Your Fashion</p>
+            <Typography
+              className="Typography-content"
+              sx={{
+                fontSize: "2rem",
+                fontWeight: "bold",
+                color: "#4C4EF0",
+                marginTop: "10vh",
+                marginBottom: "1rem",
+                marginLeft: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <p>Your Fashion Collection</p>
             </Typography>
             <div className="card-container">
               {Items.map((item, key) => (
@@ -206,9 +218,15 @@ const Dashboard = (props) => {
                   />
                   <Box className="Card-content">
                     <Info>
-                      <InfoTitle>{item.title}</InfoTitle>
-                      <InfoSubtitle>{item.subtitle}</InfoSubtitle>
-                      <InfoCaption>{item.caption}</InfoCaption>
+                      <InfoTitle>
+                        <h3>{item.title}</h3>
+                      </InfoTitle>
+                      <InfoSubtitle>
+                        <p>{item.subtitle}</p>
+                      </InfoSubtitle>
+                      <InfoCaption>
+                        <span>{item.caption}</span>
+                      </InfoCaption>
                     </Info>
                   </Box>
                 </Card>
