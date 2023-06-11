@@ -1,64 +1,100 @@
-html{
-    font-size: 10px;
+html {
+  font-size: 10px;
 }
 
-.dashboard-mainContainer{
-    background-color: #171B1E;
+.dashboard-mainContainer {
+  background-color: #171b1e;
 }
 
-.dashboard-container{
-    background-color: #171B1E;
+.dashboard-container {
+  background-color: #171b1e;
 }
 
-.AppBar-top{
-    background-color: #171B1E;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    color: #ffffff;
-    border: none;
+.AppBar-top {
+  background-color: #171b1e;
+  color: #ffffff;
+  border: none;
 }
 
-.Toolbar-top{
-    background-color: #171B1E;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    color: #ffffff;
-    border: none;
+.Toolbar-top {
+  background-color: #171b1e;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: #ffffff;
+  border: none;
 }
 
-.Typography-logo{
-    padding: 1.5rem 0;
-    font-size: 2rem;
-    font-weight: 100;
+.Typography-logo {
+  padding: 1.5rem 0;
+  font-size: 2rem;
+  font-weight: 100;
+  margin: 0 2rem;
 }
 
-.Box-drawer{
-    background-color: #171B1E;
-    color: #ffffff;
-    border: none;
+.Box-drawer {
+  background-color: #171b1e;
+  color: #ffffff;
+  border: none;
 }
 
-.Drawer-drawer{
-    background-color: #171B1E;
-    color: #ffffff;
-    height: 100%;
-    border: none;
+.Drawer-drawer {
+  background-color: #171b1e;
+  color: #ffffff;
+  height: 100%;
+  border: none;
 }
 
-.ListItemText-sidebar{
-    font-size: 1.5rem;
+.ListItemText-sidebar {
+  font-size: 1.5rem;
 }
 
-.ListItem:hover{
-    background-color: #28272F;
+.ListItem:hover {
+  background-color: #28272f;
 }
 
-.ListItemButton{
-    display: flex;
-    flex-direction: row;
+.ListItemButton {
+  display: flex;
+  flex-direction: row;
 }
 
-.Box-main{
-    background-color: #28272F;
-    color: #ffffff;
-    border: none;
-    height: 100vh;
+.Box-main {
+  position: absolute;
+  background-color: #ffffff;
+  color: #ffffff;
+  /* border: none; */
+  border: 1px solid #000000;
+  min-height: 100vh;
+  margin: 10vh 0 0 0;
+  /* right: 0; */
+  left: 240px;
+  width: calc(100% - 240px);
+}
+
+.Typography-content {
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 3rem 2rem;
+  text-align: left;
+  color: #000000;
+}
+
+.Typography-content p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.card-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-gap: 2rem; */
+  /* margin: 2rem; */
+}
+
+.itemCard-card {
+  background-color: #ffffff;
+  color: #ffffff;
+  border: none;
+  height: 20rem;
+  width: 20rem;
+  margin: 0 2rem;
 }
