@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -42,17 +42,13 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [userDetails, setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState(null);
 
-  // const fetchUser = async () => {
-  //   try {
-  //     const data = await account.get();
-  //     setUserDetails(data);
-  //     console.log(userDetails);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const fetchUser = async () => {
+    const data = await account.get();
+    setUserDetails(data);
+    // console.log(data);
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -64,9 +60,9 @@ const Dashboard = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchUser();
-  // }, [userDetails]);
+  useEffect(() => {
+    fetchUser();
+  }, [userDetails]);
 
   // const urlParams = new URLSearchParams(window.location.search);
   // const userId = urlParams.get("userId");
@@ -110,7 +106,7 @@ const Dashboard = (props) => {
         {SidebarItems.map((item, index) => (
           <ListItem className="ListItem" key={index} disablePadding>
             <ListItemButton className="ListItemButton">
-              <Link to={item.link ? item.link : ""}>
+              <Link to={item.link}>
                 <ListItemIcon
                   style={{ color: "gray" }}
                   sx={{ minWidth: "0px" }}
@@ -266,7 +262,7 @@ const Dashboard = (props) => {
                 marginLeft: { sm: `${drawerWidth}px` },
               }}
             >
-              {/* <span>Hey, {userDetails.name}</span> */}
+              <span>Hey, {(userDetails?userDetails.name:"Guest User")}</span>
               <p>Your Fashion Collection</p>
             </Typography>
             <div className="card-container">
