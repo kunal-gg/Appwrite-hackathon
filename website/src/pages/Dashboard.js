@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import AppBar from "@mui/material/AppBar";
 // import Box from "@mui/material/Box";
@@ -43,31 +44,36 @@ const Dashboard = (props) => {
 
   const drawer = (
     <div className="Drawer-drawer">
-      <Toolbar />
-      <Divider />
+      <Toolbar className="Toolbar-logo">LOGO</Toolbar>
+      <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
         {["Dashboard", "Logout"].map((text, index) => (
           <ListItem className="ListItem" key={text} disablePadding>
             <ListItemButton className="ListItemButton">
-              <ListItemIcon
-                style={{ color: "#4C4EF0", fontSize: "2rem", width: "0px" }}
-              >
-                {index % 2 === 0 ? <DashboardTwoToneIcon /> : <LogoutIcon />}
-              </ListItemIcon>
+              <Link to="/dashboard">
+                <ListItemIcon
+                  style={{ color: "gray" }}
+                  sx={{ minWidth: "0px" }}
+                >
+                  {index % 2 === 0 ? (
+                    <DashboardTwoToneIcon sx={{ fontSize: "20px" }} />
+                  ) : (
+                    <LogoutIcon sx={{ fontSize: "20px" }} />
+                  )}
+                </ListItemIcon>
+              </Link>
               <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
         {["Join our community"].map((text, index) => (
           <ListItem className="ListItem" key={text} disablePadding>
             <ListItemButton className="ListItemButton">
-              <ListItemIcon
-                style={{ color: "#4C4EF0", fontSize: "2rem", width: "0px" }}
-              >
-                <InstagramIcon />
+              <ListItemIcon style={{ color: "gray" }} sx={{ minWidth: "0px" }}>
+                <InstagramIcon sx={{ fontSize: "20px" }} />
               </ListItemIcon>
               <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
