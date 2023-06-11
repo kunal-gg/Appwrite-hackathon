@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -18,6 +19,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import {
+  Info,
+  InfoCaption,
+  InfoSubtitle,
+  InfoTitle,
+} from "@mui-treasury/components/info";
+import { useGalaxyInfoStyles } from "@mui-treasury/styles/info/galaxy";
+import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
+
 const drawerWidth = 240;
 
 const Dashboard = (props) => {
@@ -30,27 +44,36 @@ const Dashboard = (props) => {
 
   const drawer = (
     <div className="Drawer-drawer">
-      <Toolbar />
-      <Divider />
+      <Toolbar className="Toolbar-logo">LOGO</Toolbar>
+      <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
         {["Dashboard", "Logout"].map((text, index) => (
           <ListItem className="ListItem" key={text} disablePadding>
             <ListItemButton className="ListItemButton">
-              <ListItemIcon style={{ color: "#4C4EF0", fontSize: "2rem" }}>
-                {index % 2 === 0 ? <DashboardTwoToneIcon /> : <LogoutIcon />}
-              </ListItemIcon>
+              <Link to="/dashboard">
+                <ListItemIcon
+                  style={{ color: "gray" }}
+                  sx={{ minWidth: "0px" }}
+                >
+                  {index % 2 === 0 ? (
+                    <DashboardTwoToneIcon sx={{ fontSize: "20px" }} />
+                  ) : (
+                    <LogoutIcon sx={{ fontSize: "20px" }} />
+                  )}
+                </ListItemIcon>
+              </Link>
               <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
         {["Join our community"].map((text, index) => (
           <ListItem className="ListItem" key={text} disablePadding>
             <ListItemButton className="ListItemButton">
-              <ListItemIcon style={{ color: "#4C4EF0", fontSize: "2rem" }}>
-                <InstagramIcon/>
+              <ListItemIcon style={{ color: "gray" }} sx={{ minWidth: "0px" }}>
+                <InstagramIcon sx={{ fontSize: "20px" }} />
               </ListItemIcon>
               <p className="ListItemText-sidebar">{text}</p>
             </ListItemButton>
@@ -59,6 +82,41 @@ const Dashboard = (props) => {
       </List>
     </div>
   );
+
+  const Items = [
+    {
+      id: 1,
+      image:
+        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=415&q=80",
+      title: "Polo Shirt",
+      subtitle: "$20.00",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    },
+    {
+      id: 2,
+      image:
+        "https://plus.unsplash.com/premium_photo-1671656349262-1e1d3e09735c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      title: "Shirt",
+      subtitle: "$40.00",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    },
+    {
+      id: 3,
+      image:
+        "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80",
+      title: "Pant",
+      subtitle: "$15.00",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    },
+    {
+      id: 4,
+      image:
+        "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+      title: "Shoes",
+      subtitle: "$50.00",
+      caption: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    },
+  ];
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -86,7 +144,9 @@ const Dashboard = (props) => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography className="Typography-logo">Dashboard</Typography>
+              <Typography className="Typography-logo">
+                <p>Dashboard</p>
+              </Typography>
             </Toolbar>
           </AppBar>
           <Box
@@ -138,7 +198,47 @@ const Dashboard = (props) => {
               p: 3,
               width: { sm: `calc(100% - ${drawerWidth}px)` },
             }}
-          ></Box>
+          >
+            <Typography
+              className="Typography-content"
+              sx={{
+                fontSize: "2rem",
+                fontWeight: "bold",
+                color: "#4C4EF0",
+                marginTop: "10vh",
+                marginBottom: "1rem",
+                marginLeft: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <p>Your Fashion Collection</p>
+            </Typography>
+            <div className="card-container">
+              {Items.map((item, key) => (
+                <Card className="itemCard-card" key={key}>
+                  <CardMedia
+                    className="CardMedia-media"
+                    component="img"
+                    height="140"
+                    image={item.image}
+                    alt={item.title}
+                  />
+                  <Box className="Card-content">
+                    <Info>
+                      <InfoTitle>
+                        <h3>{item.title}</h3>
+                      </InfoTitle>
+                      <InfoSubtitle>
+                        <p>{item.subtitle}</p>
+                      </InfoSubtitle>
+                      <InfoCaption>
+                        <span>{item.caption}</span>
+                      </InfoCaption>
+                    </Info>
+                  </Box>
+                </Card>
+              ))}
+            </div>
+          </Box>
         </Box>
       </div>
     </div>

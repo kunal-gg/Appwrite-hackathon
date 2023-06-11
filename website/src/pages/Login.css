@@ -7,16 +7,16 @@ html {
     no-repeat center center fixed;
   background-size: cover;
   backdrop-filter: brightness(0.5); */
-  background-color: #171B1E;
+  background-color: #171b1e;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-container{
-    width: 100%;
-    max-width: 500px;
+.login-container {
+  width: 100%;
+  max-width: 400px;
 }
 
 .login-form {
@@ -117,25 +117,26 @@ html {
   color: white;
 }
 
-.login-signup{
-    color: #ffffff;
-    font-size: 1.5rem;
+.login-signup {
+  color: #ffffff;
+  font-size: 1.5rem;
 }
 
-.google-btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-    border: none;
-    outline: none;
-    color: white;
-    width: 100%;
-    background-color: #252525;
-    margin: 0 0 5rem;
-    cursor: pointer;
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  background-color: #252525;
+  margin: 0 0 5rem;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
 }
 
-.google-btn:hover{
-    background-color: #444444;
+.google-btn:hover {
+  background-color: #444444;
 }
