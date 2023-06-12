@@ -1,0 +1,142 @@
+html {
+  font-size: 10px;
+}
+
+.login-mainContainer {
+  /* background: url(https://images.unsplash.com/photo-1640904422940-f3070d65ae29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80)
+    no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: brightness(0.5); */
+  background-color: #171b1e;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 0 5rem;
+  background-color: #171717;
+  border-radius: 10px;
+  transition: 0.4s ease-in-out;
+  width: 100%;
+}
+
+.login-form:hover {
+  transform: scale(1.05);
+  border: 1px solid black;
+}
+
+#login-heading {
+  text-align: center;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.login-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 1rem 2rem;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
+}
+
+.login-form .btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+/* .login-btn {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  margin-right: 0.5em;
+  border: none;
+  outline: none;
+  transition: 0.4s ease-in-out;
+  background-color: #252525;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: black;
+  color: white;
+} */
+
+/* .signup-btn {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  transition: 0.4s ease-in-out;
+  background-color: #252525;
+  color: white;
+}
+
+.signup-btn:hover {
+  background-color: black;
+  color: white;
+} */
+
+.login-btn {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  transition: 0.4s ease-in-out;
+  background-color: #252525;
+  color: white;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+.login-signup {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  background-color: #252525;
+  margin: 0 0 5rem;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+.google-btn:hover {
+  background-color: #444444;
+}
