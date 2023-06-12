@@ -20,6 +20,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark', // Set the theme mode to dark
+  },
+});
 import {
   Info,
   InfoCaption,
@@ -118,8 +125,7 @@ const Dashboard = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className="dashboard-mainContainer">
-      <div className="dashboard-container">
+    <ThemeProvider theme={theme}>
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar
@@ -236,8 +242,7 @@ const Dashboard = (props) => {
             </div>
           </Box>
         </Box>
-      </div>
-    </div>
+        </ThemeProvider>
   );
 };
 
