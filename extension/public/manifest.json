@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Your Extension Name",
+    "version": "1.0",
+    "description": "Your extension description",
+    "action": {
+      "default_popup": "index.html"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ]
+  }
+  
