@@ -1,6 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { account } from "../Config";
 import AppBar from "@mui/material/AppBar";
 // import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -35,34 +39,82 @@ import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 const drawerWidth = 240;
 
 const Dashboard = (props) => {
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [userDetails, setUserDetails] = useState(null);
+
+  const fetchUser = async () => {
+    const data = await account.get();
+    setUserDetails(data);
+    // console.log(data);
+  };
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await account.deleteSession("current");
+      navigate("/login");
+    } catch (error) {
+      toast.error(`${error.message}`);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [userDetails]);
+
+  // const urlParams = new URLSearchParams(window.location.search);
+  // const userId = urlParams.get("userId");
+  // const secret = urlParams.get("secret");
+
+  // if (userId) {
+  //   account
+  //     .updateVerification(userId, secret)
+  //     .then(() => {
+  //       toast.success("User is verified!");
+  //       navigate("/dashboard");
+  //     })
+  //     .catch((e) => {
+  //       toast.error("Verification failed");
+  //       console.log(e);
+  //     });
+  // }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const SidebarItems = [
+    {
+      text: "Dashboard",
+      link: "/dashboard",
+      icon: <DashboardTwoToneIcon sx={{ fontSize: "20px" }} />,
+    },
+    {
+      text: "Logout",
+      link: null,
+      icon: <LogoutIcon sx={{ fontSize: "20px" }} />,
+    },
+  ];
 
   const drawer = (
     <div className="Drawer-drawer">
       <Toolbar className="Toolbar-logo">LOGO</Toolbar>
       <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
-        {["Dashboard", "Logout"].map((text, index) => (
-          <ListItem className="ListItem" key={text} disablePadding>
+        {SidebarItems.map((item, index) => (
+          <ListItem className="ListItem" key={index} disablePadding>
             <ListItemButton className="ListItemButton">
-              <Link to="/dashboard">
+              <Link to={item.link}>
                 <ListItemIcon
                   style={{ color: "gray" }}
                   sx={{ minWidth: "0px" }}
                 >
-                  {index % 2 === 0 ? (
-                    <DashboardTwoToneIcon sx={{ fontSize: "20px" }} />
-                  ) : (
-                    <LogoutIcon sx={{ fontSize: "20px" }} />
-                  )}
+                  {item.icon}
                 </ListItemIcon>
               </Link>
-              <p className="ListItemText-sidebar">{text}</p>
+              <p className="ListItemText-sidebar">{item.text}</p>
             </ListItemButton>
           </ListItem>
         ))}
@@ -210,6 +262,7 @@ const Dashboard = (props) => {
                 marginLeft: { sm: `${drawerWidth}px` },
               }}
             >
+              <span>Hey, {(userDetails?userDetails.name:"Guest User")}</span>
               <p>Your Fashion Collection</p>
             </Typography>
             <div className="card-container">
