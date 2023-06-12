@@ -137,7 +137,7 @@ const Dashboard = (props) => {
       <Divider sx={{ backgroundColor: "#27293A" }} />
       <List>
         {["Join our community"].map((text, index) => (
-          <ListItem className="ListItem" key={text} disablePadding>
+          <ListItem className="ListItem-community" key={text} disablePadding>
             <ListItemButton className="ListItemButton">
               <ListItemIcon style={{ color: "white" }} sx={{ minWidth: "0px" }}>
                 <InstagramIcon sx={{ fontSize: "25px" }} />

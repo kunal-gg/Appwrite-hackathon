@@ -58,7 +58,7 @@ html {
   padding-left: .5rem;
 }
 
-.ListItem{
+.ListItem, .ListItem-community{
   background-color: #36363A;
   margin: auto;
   width: 80%;
@@ -67,6 +67,10 @@ html {
   font-family: 'Popins', sans-serif;
   font-weight: 500;
   letter-spacing: .6px;
+}
+
+.ListItem:first-child{
+  margin-top: 3rem;
 }
 
 .ListItemText-sidebar {
