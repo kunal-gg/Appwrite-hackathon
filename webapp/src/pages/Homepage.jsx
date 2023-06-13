@@ -112,7 +112,7 @@ function Navbar() {
       padding: 4,
       justifyContent: "space-between"
     }}>
-      <img src="src/assets/Logo.png" alt="" width={50} />
+      <img src="https://i.postimg.cc/6pJDpfGc/Logo.png" alt="" width={50} />
       <Box>
         <Link to="/find">
         <CustomButton name="Get Started" variant="text"/>
