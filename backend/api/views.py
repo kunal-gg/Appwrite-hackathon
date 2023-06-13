@@ -2,21 +2,34 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .utils import downloadVideo, getVideoFrames, hostImage, deleteVideo, getGoogleImage
+from .utils import downloadVideo, getVideoFrames, hostImage, deleteVideo, googleLensOnAppwrite, cropImage
 
-class VideoToImage(APIView):
 
-    def get(self, request, format=None):
-        # link = request.data['link']
-        # timestamp = request.data['timestamp']
-        link = "https://www.youtube.com/watch?v=rrlY04Hmb4U&list=RDrrlY04Hmb4U&start_radio=1"
-        timestamp = 90
+class PreviewView(APIView):
+
+    def post(self,request,*args,**kwargs):
+        link = request.data['link']
+        timestamp = request.data['timestamp']
         video_path = downloadVideo(link)
         image_path = getVideoFrames(video_path, timestamp)
         image_link = hostImage(image_path)
         if video_path:
             deleteVideo(video_path)
-        data = getGoogleImage(image_link)
-        return Response({'response': data})
+        return Response({'preview_link': image_link})
+    
+
+class CropView(APIView):
+
+    def post (self,request,*args,**kwargs):
+        image_link = request.data['image_link']
+        image_link_list =cropImage(image_link)
+        return Response({'crop_link': image_link_list})
 
 
+class GoogleLensView(APIView):
+
+    def post(self,request,*args,**kwargs):
+        image_link = request.data['image_link']
+        visual_matches = googleLensOnAppwrite(image_link)
+        return Response({'visual_matches': visual_matches})
+    
