@@ -60,13 +60,13 @@ function Options() {
   return( 
     <Box 
       sx={{
-        height: "100vh"
+        height: "60vh",
       }}
     >
-      <Container>
-        <Typography variant="h3" component="h3" align="center">Why use Name</Typography>
-        <Typography variant="subtitle1"fontSize={16} align="center" color="textSecondary">Explore the features of Popwola that make it the ultimate no-code popup builder</Typography>
-        <Grid container spacing={5}>
+      <Container sx={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+        <Typography variant="h3" component="h3" align="center" gutterBottom={true}>Why use Name</Typography>
+        <Typography variant="subtitle1"fontSize={16} align="center" color="textSecondary" gutterBottom={true}>Explore the features of Popwola that make it the ultimate no-code popup builder</Typography>
+        <Grid container spacing={5} sx={{marginY: 1}}>
           <CustomCard />
           <CustomCard />
           <CustomCard />
@@ -127,25 +127,21 @@ export function CustomButton(props) {
 
 const Footer = ()=> {
   return(
-    <Box sx={{
-      height: "60vh", 
-      display: "flex", 
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-
-    <Container>
-      <Grid container>
-        <Grid item xs={6}>
-          <Typography variant="h6" component="h6">Start Now</Typography>
-          <Typography variant="h3" component="h3">Lorem ipsum dolor sit.</Typography>
+    <Container sx={{height: "60vh"}}>
+      <Grid container sx={{height: "100%"}}>
+        <Grid item xs={6} sx={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+          <Typography variant="h6" component="h6" gutterBottom={true}>Start Now</Typography>
+          <Typography variant="h3" component="h3" gutterBottom={true}>Lorem ipsum dolor sit.</Typography>
+          <Typography variant="subtitle1" fontSize={16} color="textSecondary" gutterBottom={true}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, temporibus pariatur? Illum reiciendis sequi quos recusandae repellat minima iste ad..</Typography>
+          <Box sx={{marginY: 2}}>
           <CustomButton name="Get Started" variant="contained" />
-          <CustomButton name="Get Our Chrome Extension" variant="outlined" />
+          <CustomButton name="Get Our Chrome Extension" variant="text" />
+          </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
           <Box sx={{display: "flex", }}>
 
-          <Card sx={{paddingX: 1}}>
+          <Card sx={{marginX: 1}}>
             <CardHeader title="Subscribe to our newsletter" />
             <CardContent>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
@@ -154,7 +150,7 @@ const Footer = ()=> {
               <Button variant="text" color="primary">Learn More</Button>
             </CardActions>
           </Card>
-          <Card>
+          <Card sx={{marginX: 1}}>
             <CardHeader title="Subscribe to our newsletter" />
             <CardContent>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
@@ -167,7 +163,6 @@ const Footer = ()=> {
         </Grid>
       </Grid>
     </Container>
-    </Box>
   )
 }
 
