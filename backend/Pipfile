@@ -32,6 +32,7 @@ moviepy = "*"
 charset-normalizer = "*"
 google-search-results = "*"
 mediapipe = "*"
+appwrite = "*"
 
 [dev-packages]
 

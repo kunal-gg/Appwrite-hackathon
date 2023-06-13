@@ -5,6 +5,8 @@ from imgurpython import ImgurClient
 from moviepy.editor import VideoFileClip
 from PIL import Image
 from serpapi import GoogleSearch
+from appwrite.client import Client
+from appwrite.services.functions import Functions
 
 import os
 
@@ -56,3 +58,18 @@ def deleteVideo(path):
     else:
         print("File does not exist")
         return "File does not exist"
+    
+def googleLensOnAppwrite(image_link):
+    client = Client()
+
+    (client
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('64846d81a1175c196318') # Your project ID
+    .set_key('ec930e602439a6d223c772eabc350af3381ca621294e809d423744dd4be34817238884d7c35b6a731dd7c4c306165afd1b5d3f101742aac34ec9b2727e2cf0ffa3c15f1811b9b343992b97fdfc3b753c60294d1b14c1108ce9e27be02aa4c68020a279a0c6deb12c3d4477230d9de015a40410e83cf0fdb67cb25276ce8ae979') # Your secret API key
+    )
+
+    functions = Functions(client)
+
+    result = functions.create_execution('64846d977441fb1ae8db')
+
+    return result

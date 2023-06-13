@@ -1,9 +1,10 @@
 from rest_framework import routers
 from django.urls import path, include
-from .views import VideoToImage
+from .views import PreviewView
 
 
 
 urlpatterns = [
-    path('link/', VideoToImage.as_view(), name='video_to_image'),
+    path('preview/', PreviewView.as_view(), name='preview'),
+
 ]
