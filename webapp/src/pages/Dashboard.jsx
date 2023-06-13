@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { account } from "../Config";
 import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -21,10 +21,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import {
   Info,
   InfoCaption,
@@ -37,13 +36,13 @@ const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
 
   const fetchUser = async () => {
     const data = await account.get();
     setUserDetails(data);
-    // console.log(data);
+
   };
 
   const handleLogout = async (e) => {
