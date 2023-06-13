@@ -6,6 +6,7 @@ import  GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom"
+import { account }from "../Config"
 
 export default function LandingPage(){
 
@@ -106,6 +107,11 @@ function CustomCard() {
 }
 
 function Navbar() {
+
+  const signIn = () => {
+    account.createOAuth2Session('google');
+  }
+
   return(
     <Box sx={{
       display: "flex",
@@ -115,9 +121,11 @@ function Navbar() {
       <img src="https://i.postimg.cc/6pJDpfGc/Logo.png" alt="" width={50} />
       <Box>
         <Link to="/find">
-        <CustomButton name="Get Started" variant="text"/>
+        <CustomButton name="Get Started" variant="text" />
         </Link>
-        <CustomButton name="Sign In" variant="contained"/>
+        <Button  variant="contained" color="primary" size="large" onClick={signIn}>
+          <Typography variant="button" fontWeight="bold" fontSize={15} >SignIn</Typography>
+        </Button>
       </Box>
     </Box>
   )

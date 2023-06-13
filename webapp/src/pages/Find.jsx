@@ -1,11 +1,27 @@
-import { Box, Button, Card, CardContent, CardHeader, Container, Grid, Paper, TextField, Typography, Tab, Tabs  } from "@mui/material"
+import { Box, Button, Card, CardContent, CardHeader, Container, Grid, Paper, TextField, Typography, Tab, Tabs, CardActions  } from "@mui/material"
 import { CustomButton } from "./Homepage"
 import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import Youtbe from 'react-youtube'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
+
+function checkTab(value){
+    if(value == 0){
+        return <SearchBar />
+    }
+
+    else if(value == 1) {
+        return <CustomCarousel pictures={null}/>
+    }
+
+    else{
+        return <Typography variant="h1">Hello world</Typography>
+    }
+}
 
 export default function Find(){
     const [value, setValue] = useState(0);
@@ -34,7 +50,10 @@ export default function Find(){
       }, [])
     return(
         <Box sx={{
-            height: "100vh"
+            height: "100vh",
+            display: "flex", 
+            flexDirection: "column", 
+            justifyContent: "space-between"
         }}>
             <Paper>
                 <Box sx={{
@@ -59,11 +78,12 @@ export default function Find(){
                 </Box>
                 <Tabs value={value} centered onChange={handleChange}>
                     <Tab label={<Typography fontSize={14}>Preview</Typography>}/>
+                    <Tab label={<Typography fontSize={14}>Photos</Typography>}/>
                     <Tab label={<Typography fontSize={14}>Results</Typography>}/>
                 </Tabs>
             </Paper>
 
-        {value == 0 ? <SearchBar /> : <Typography>This is</Typography>}
+        {checkTab(value)}
         <UploadImageFooter />
         </Box>
 
@@ -108,8 +128,6 @@ function SearchBar() {
 function UploadImageFooter() {
     return(
     <Paper sx={{
-            position: 'fixed',
-            bottom: 0
         }}>
         <Box sx={{
             paddingY: 2,
@@ -137,8 +155,7 @@ const YoutubeVideo = (props) => {
       };
 
     const opts = {
-        height: '300',
-        width: '664',
+        width: '400',
         playerVars: {
           autoplay: 0,
         },
@@ -147,4 +164,29 @@ const YoutubeVideo = (props) => {
           <Youtbe videoId="BXR98NlZXwo" opts={opts} onReady={onReady}/>
 
       )
+}
+
+const CustomCarousel = (props) => {
+    const { pictures } = props;
+    console.log(pictures)
+
+    return(
+        pictures == null ? <Container maxWidth="sm">
+            <Paper>
+            <img src="https://i.postimg.cc/gkrpf28s/image-removebg-preview-2.png" height={350} />
+            </Paper>
+        </Container> :
+        <Container maxWidth="sm" sx={{marginY: 2}}>
+            <Carousel>
+                <Card sx={{height: "60vh"}}>
+                    <CardHeader title="Hello World" />
+                    <CardContent>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit doloribus, alias nulla ratione nisi vel perspiciatis quos autem eligendi voluptas!</CardContent>
+                    <CardActions />
+                </Card>
+                <Card></Card>
+                <Card></Card>
+            </Carousel>
+        </Container>
+
+    )
 }
