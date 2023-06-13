@@ -14,7 +14,7 @@ import mediapipe as mp
 import urllib.request
 import numpy as np
 from imgurpython import ImgurClient
-
+import json
 
 def downloadVideo(link):
     yt = YouTube(link)
@@ -66,9 +66,10 @@ def googleLensOnAppwrite(image_link):
     .set_key('ec930e602439a6d223c772eabc350af3381ca621294e809d423744dd4be34817238884d7c35b6a731dd7c4c306165afd1b5d3f101742aac34ec9b2727e2cf0ffa3c15f1811b9b343992b97fdfc3b753c60294d1b14c1108ce9e27be02aa4c68020a279a0c6deb12c3d4477230d9de015a40410e83cf0fdb67cb25276ce8ae979') # Your secret API key
     )
     payload = {
-        'link': image_link,
+        "link" : image_link
     }
-
+    payload  = json.dumps(payload)
+    
     functions = Functions(client)
 
     result = functions.create_execution('64846d977441fb1ae8db',payload)
