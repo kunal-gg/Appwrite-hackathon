@@ -1,10 +1,11 @@
-import { Box, Button, Card, Container, CssBaseline, Grid, Typography, CardHeader, CardContent, Avatar, CardActions, Link} from "@mui/material";
+import { Box, Button, Card, Container, CssBaseline, Grid, Typography, CardHeader, CardContent, Avatar, CardActions} from "@mui/material";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { FaUser } from 'react-icons/fa';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import  GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Link } from "react-router-dom"
 
 export default function LandingPage(){
 
@@ -29,15 +30,18 @@ export default function LandingPage(){
         <Container>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Typography variant="h1" component="h1" fontWeight="bold">Image Search</Typography>
-              <Typography variant="h1" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
-              <Typography color="textSecondary" variant="h4" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
+              <Typography variant="h2" component="h1" fontWeight="bold">Image Search</Typography>
+              <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
+              <Typography color="textSecondary" variant="h5" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
               <Box sx={{
                 padding: 2
               }}></Box>
-              <Button  variant="contained" color="primary" size="large">
-                <Typography variant="button" fontWeight="bold" fontSize={15} >Get Started</Typography>
-              </Button>
+              <Link to="/find">
+                <Button  variant="contained" color="primary" size="large">
+                  <Typography variant="button" fontWeight="bold" fontSize={15} >Get Started</Typography>
+                </Button>
+              </Link>
+
               <Button variant="contained" color="secondary" size="large" sx={{marginX: 3}}>
               <Typography variant="button" fontWeight="bold" fontSize={15} >Star On GitHub</Typography>
               </Button>
@@ -105,31 +109,39 @@ function Navbar() {
   return(
     <Box sx={{
       display: "flex",
-      padding: 2,
+      padding: 4,
       justifyContent: "space-between"
     }}>
-      Logo
+      <img src="https://i.postimg.cc/6pJDpfGc/Logo.png" alt="" width={50} />
       <Box>
+        <Link to="/find">
         <CustomButton name="Get Started" variant="text"/>
+        </Link>
         <CustomButton name="Sign In" variant="contained"/>
       </Box>
     </Box>
   )
 }
 
+
+
 export function CustomButton(props) {
+
+  const {variant , name} = props
+
   return (
-  <Button  variant={props.variant} color="primary" size="large">
-    <Typography variant="button" fontWeight="bold" fontSize={15} >{props.name}</Typography>
+  <Button  variant={variant} color="primary" size="large">
+    <Typography variant="button" fontWeight="bold" fontSize={15} >{name}</Typography>
   </Button>
   )
 }
+
 
 const Footer = ()=> {
   return(
     <Container sx={{height: "60vh"}}>
       <Grid container sx={{height: "100%"}}>
-        <Grid item xs={6} sx={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+        <Grid item xs={6} sx={{display: "flex", flexDirection: "column", justifyContent: "start"}}>
           <Typography variant="h6" component="h6" gutterBottom={true}>Start Now</Typography>
           <Typography variant="h3" component="h3" gutterBottom={true}>Lorem ipsum dolor sit.</Typography>
           <Typography variant="subtitle1" fontSize={16} color="textSecondary" gutterBottom={true}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, temporibus pariatur? Illum reiciendis sequi quos recusandae repellat minima iste ad..</Typography>
@@ -138,7 +150,7 @@ const Footer = ()=> {
           <CustomButton name="Get Our Chrome Extension" variant="text" />
           </Box>
         </Grid>
-        <Grid item xs={6} sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Grid item xs={6}>
           <Box sx={{display: "flex", }}>
 
           <Card sx={{marginX: 1}}>
