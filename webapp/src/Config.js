@@ -1,4 +1,4 @@
-import { Client, Graphql, Account } from "appwrite";
+import { Client, Graphql, Account, Databases } from "appwrite";
 
 // initialize SDK
 const client = new Client();
@@ -9,3 +9,5 @@ client
 export const account = new Account(client);
 
 export const graphql = new Graphql(client);
+
+export const databases = new Databases(client);
