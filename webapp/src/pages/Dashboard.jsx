@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "./Dashboard.css";
+// import "./Dashboard.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { account } from "../Config";
@@ -17,21 +17,23 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-
+import Paper from "@mui/material/Paper";
 import {
   Info,
   InfoCaption,
   InfoSubtitle,
   InfoTitle,
 } from "@mui-treasury/components/info";
+import { ListItemText } from "@mui/material";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -42,7 +44,6 @@ const Dashboard = (props) => {
   const fetchUser = async () => {
     const data = await account.get();
     setUserDetails(data);
-
   };
 
   const handleLogout = async (e) => {
@@ -67,12 +68,17 @@ const Dashboard = (props) => {
     {
       text: "Dashboard",
       link: "/dashboard",
-      icon: <DashboardTwoToneIcon sx={{ fontSize: "25px" }} />,
+      icon: <DashboardTwoToneIcon sx={{ fontSize: "large" }} />,
     },
     {
       text: "Logout",
       link: null,
-      icon: <LogoutIcon sx={{ fontSize: "25px" }} />,
+      icon: <LogoutIcon sx={{ fontSize: "large" }} />,
+    },
+    {
+      text: "Join our community",
+      link: "https://www.instagram.com/",
+      icon: <InstagramIcon sx={{ fontSize: "large" }} />,
     },
   ];
 
@@ -86,51 +92,6 @@ const Dashboard = (props) => {
       navigate("/dashboard");
     }
   };
-  const drawer = (
-    <div className="Drawer-drawer">
-      <Toolbar className="Toolbar-logo">LOGO</Toolbar>
-      <Divider sx={{ backgroundColor: "#27293A" }} />
-      <List>
-        {SidebarItems.map((item, index) => (
-          <ListItem
-            className="ListItem"
-            key={index}
-            sx={{
-              backgroundColor: `${
-                item.text === "Dashboard" ? "#28272f" : "#36363A"
-              }`,
-            }}
-            disablePadding
-          >
-            <ListItemButton
-              className="ListItemButton"
-              onClick={() =>
-                handleListItem(item.text === "Logout" ? "Logout" : "Dashboard")
-              }
-            >
-              <ListItemIcon style={{ color: "white" }} sx={{ minWidth: "0px" }}>
-                {item.icon}
-              </ListItemIcon>
-              <p className="ListItemText-sidebar">{item.text}</p>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider sx={{ backgroundColor: "#27293A" }} />
-      <List>
-        {["Join our community"].map((text, index) => (
-          <ListItem className="ListItem-community" key={text} disablePadding>
-            <ListItemButton className="ListItemButton">
-              <ListItemIcon style={{ color: "white" }} sx={{ minWidth: "0px" }}>
-                <InstagramIcon sx={{ fontSize: "25px" }} />
-              </ListItemIcon>
-              <p className="ListItemText-sidebar">{text}</p>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
 
   const Items = [
     {
@@ -166,6 +127,54 @@ const Dashboard = (props) => {
       caption: "lorem ipsum dolor sit amet,",
     },
   ];
+
+  const drawer = (
+    <Box sx={{height:"100%"}}>
+      <Toolbar className="Toolbar-logo">LOGO</Toolbar>
+      <Box display="flex" sx={{height:"85%", flexDirection:"column", justifyContent:"space-between"}}>
+        <Paper sx={{ m: 2, borderRadius: 3 }}>
+          <List>
+            {SidebarItems.map((item, index) => (
+              <ListItem className="ListItem" key={index} disablePadding>
+                <ListItemButton
+                  className="ListItemButton"
+                  sx={{ py: 1 }}
+                  onClick={() =>
+                    handleListItem(
+                      item.text === "Logout" ? "Logout" : "Dashboard"
+                    )
+                  }
+                >
+                  <ListItemIcon
+                    sx={{ color: "inherit", minWidth: "0px", px: 1 }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    primaryTypographyProps={{
+                      fontSize: 14,
+                    }}
+                    color="textSecondary"
+                    className="ListItemText-sidebar"
+                  ></ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
+        <Paper sx={{ m: 2, borderRadius: 3, textAlign: "center", p: 2 }}>
+          <Typography variant="subtitle2" display="block">
+            LOVE THE PROJECT? 💖
+          </Typography>
+          <Typography variant="caption" display="block" sx={{ color: "gray" }}>
+            Leave a star / tweet on social
+          </Typography>
+          <GitHubIcon />
+        </Paper>
+      </Box>
+    </Box>
+  );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -261,14 +270,18 @@ const Dashboard = (props) => {
             sx={{
               fontSize: "2rem",
               fontWeight: "bold",
-              color: "#4C4EF0",
+              // color: "#4C4EF0",
               marginTop: "10vh",
               marginBottom: "1rem",
-              marginLeft: { sm: `${drawerWidth}px` },
+              // marginLeft: { sm: `${drawerWidth}px` },
             }}
           >
-            <span>Hello, {userDetails ? userDetails.name : "Guest User"}</span>
-            <p>Your Fashion Collection</p>
+            <Typography variant="body1" gutterBottom>
+              Hello, {userDetails ? userDetails.name : "Guest User"}
+            </Typography>
+            <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+              Your Fashion Collection
+            </Typography>
           </Typography>
           <div className="card-container">
             {Items.map((item, key) => (
