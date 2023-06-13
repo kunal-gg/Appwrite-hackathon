@@ -60,10 +60,10 @@ function Options() {
   return( 
     <Box 
       sx={{
-        height: "60vh",
+        height: "64vh",
       }}
     >
-      <Container sx={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+      <Container sx={{height: "100%", display: "flex", flexDirection: "column"}}>
         <Typography variant="h3" component="h3" align="center" gutterBottom={true}>Why use Name</Typography>
         <Typography variant="subtitle1"fontSize={16} align="center" color="textSecondary" gutterBottom={true}>Explore the features of Popwola that make it the ultimate no-code popup builder</Typography>
         <Grid container spacing={5} sx={{marginY: 1}}>
