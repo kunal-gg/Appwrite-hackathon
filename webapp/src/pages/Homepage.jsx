@@ -30,9 +30,9 @@ export default function LandingPage(){
         <Container>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Typography variant="h1" component="h1" fontWeight="bold">Image Search</Typography>
-              <Typography variant="h1" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
-              <Typography color="textSecondary" variant="h4" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
+              <Typography variant="h2" component="h1" fontWeight="bold">Image Search</Typography>
+              <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
+              <Typography color="textSecondary" variant="h5" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
               <Box sx={{
                 padding: 2
               }}></Box>
