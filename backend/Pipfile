@@ -33,6 +33,8 @@ charset-normalizer = "*"
 google-search-results = "*"
 mediapipe = "*"
 appwrite = "*"
+numpy = "*"
+pyparsing = "*"
 
 [dev-packages]
 
