@@ -22,9 +22,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 import {
   Info,
   InfoCaption,
