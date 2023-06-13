@@ -1,6 +1,10 @@
-import { Box, Button, Card, Container, CssBaseline, Grid, Typography, CardHeader, CardContent, Avatar} from "@mui/material";
+import { Box, Button, Card, Container, CssBaseline, Grid, Typography, CardHeader, CardContent, Avatar, CardActions, Link} from "@mui/material";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { FaUser } from 'react-icons/fa';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import  GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default function LandingPage(){
 
@@ -13,6 +17,7 @@ export default function LandingPage(){
   return (
     <ThemeProvider theme={darktheme} >
       <CssBaseline /> 
+      <Navbar />
       <Box 
         sx={{
           height: "100vh",
@@ -26,8 +31,10 @@ export default function LandingPage(){
             <Grid item xs={6}>
               <Typography variant="h1" component="h1" fontWeight="bold">Image Search</Typography>
               <Typography variant="h1" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
-              <Typography color="textSecondary" variant="h4" component="h2"
-              gutterBottom={true}> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
+              <Typography color="textSecondary" variant="h4" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
+              <Box sx={{
+                padding: 2
+              }}></Box>
               <Button  variant="contained" color="primary" size="large">
                 <Typography variant="button" fontWeight="bold" fontSize={15} >Get Started</Typography>
               </Button>
@@ -36,13 +43,15 @@ export default function LandingPage(){
               </Button>
             </Grid>
             <Grid item xs={6}>
-              <img src="https://o.remove.bg/downloads/c13e7c40-911f-4466-986a-3251e3cea74d/image-removebg-preview.png" alt="landing page" />
+              <img src="https://i.postimg.cc/9FdQCRxb/search-concept-landing-page-52683-21525-removebg-preview.png" alt="landing page" />
             </Grid>
           </Grid>
 
         </Container>
       </Box>
       <Options />
+      <Footer />
+      <FinalFooter />
     </ThemeProvider>
   )
 }
@@ -89,5 +98,94 @@ function CustomCard() {
         </CardContent>
       </Card>
     </Grid>
+  )
+}
+
+function Navbar() {
+  return(
+    <Box sx={{
+      display: "flex",
+      padding: 2,
+      justifyContent: "space-between"
+    }}>
+      Logo
+      <Box>
+        <CustomButton name="Get Started" variant="text"/>
+        <CustomButton name="Sign In" variant="contained"/>
+      </Box>
+    </Box>
+  )
+}
+
+export function CustomButton(props) {
+  return (
+  <Button  variant={props.variant} color="primary" size="large">
+    <Typography variant="button" fontWeight="bold" fontSize={15} >{props.name}</Typography>
+  </Button>
+  )
+}
+
+const Footer = ()=> {
+  return(
+    <Box sx={{
+      height: "60vh", 
+      display: "flex", 
+      justifyContent: "center",
+      alignItems: "center",
+    }}>
+
+    <Container>
+      <Grid container>
+        <Grid item xs={6}>
+          <Typography variant="h6" component="h6">Start Now</Typography>
+          <Typography variant="h3" component="h3">Lorem ipsum dolor sit.</Typography>
+          <CustomButton name="Get Started" variant="contained" />
+          <CustomButton name="Get Our Chrome Extension" variant="outlined" />
+        </Grid>
+        <Grid item xs={6}>
+          <Box sx={{display: "flex", }}>
+
+          <Card sx={{paddingX: 1}}>
+            <CardHeader title="Subscribe to our newsletter" />
+            <CardContent>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
+            </CardContent>
+            <CardActions>
+              <Button variant="text" color="primary">Learn More</Button>
+            </CardActions>
+          </Card>
+          <Card>
+            <CardHeader title="Subscribe to our newsletter" />
+            <CardContent>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
+            </CardContent>
+            <CardActions>
+              <Button variant="text" color="primary">Learn More</Button>
+            </CardActions>
+          </Card>
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
+    </Box>
+  )
+}
+
+const FinalFooter = ()=>{
+  return(
+      <Container>
+    <Box sx={{height:"10vh", display: "flex", justifyContent:"space-between", alignItems: "center", borderTop: "1px solid white"}}>
+          <Typography fontSize={15} variant="body">Copyright 2023</Typography>
+          <Box>
+          <Grid container spacing={2}>
+            <Grid item ><InstagramIcon fontSize="large"/></Grid>
+            <Grid item><GitHubIcon fontSize="large"/></Grid>
+            <Grid item><TwitterIcon fontSize="large"/></Grid>
+            <Grid item><LinkedInIcon fontSize="large"/></Grid>
+          </Grid>
+          </Box>
+
+    </Box>
+      </Container>
   )
 }
