@@ -150,7 +150,7 @@ const Footer = ()=> {
           <CustomButton name="Get Our Chrome Extension" variant="text" />
           </Box>
         </Grid>
-        <Grid item xs={6} sx={{marginY: 4}}>
+        <Grid item xs={6}>
           <Box sx={{display: "flex", }}>
 
           <Card sx={{marginX: 1}}>
