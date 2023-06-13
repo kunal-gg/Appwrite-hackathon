@@ -31,8 +31,7 @@ imgurpython = "*"
 moviepy = "*"
 charset-normalizer = "*"
 google-search-results = "*"
-
-
+mediapipe = "*"
 
 [dev-packages]
 
