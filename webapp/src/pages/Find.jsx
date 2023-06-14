@@ -23,7 +23,7 @@ const checkTabValue = (value) => {
         case 1:
             return <CustomCarousel />
         case 2:
-            return <CustomCarousel />
+            return <Typography variant="h1">Hello World</Typography>
     }
 }
 
