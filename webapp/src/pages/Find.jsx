@@ -7,17 +7,16 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import Youtbe from 'react-youtube'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useEffect } from "react";
 
 
 function checkTab(value){
     if(value == 0){
         return <SearchBar />
     }
-
     else if(value == 1) {
         return <CustomCarousel pictures={null}/>
     }
-
     else{
         return <Typography variant="h1">Hello world</Typography>
     }
@@ -29,25 +28,6 @@ export default function Find(){
         setValue(newValue);
       };
 
-      const [searchParam, setParam] = useState({})
-      useState(() => {
-        
-        const getParams = ()=> {
-            const urlParams = new URLSearchParams(window.location.search);
-            let params = {};
-
-            for (const [key, value] of urlParams) {
-                params[key] = value;
-            }
-
-            console.log(params);
-            return params;
-        }
-
-        const param = getParams();
-        setParam(param);
-        
-      }, [])
     return(
         <Box sx={{
             height: "100vh",
@@ -82,21 +62,16 @@ export default function Find(){
                     <Tab label={<Typography fontSize={14}>Results</Typography>}/>
                 </Tabs>
             </Paper>
-
         {checkTab(value)}
         <UploadImageFooter />
         </Box>
-
     )
 }
 
-
-
 // Making a Custome Search bar
-function SearchBar() {
+function SearchBar(props) {
     return( 
         <Box sx={{marginY: 3}}>
-
         <Container>
         <Card>
             <CardHeader title={  
@@ -112,12 +87,9 @@ function SearchBar() {
                         <CustomButton name="Find" variant="contained" />
                     </Grid>
                 </Grid >
-                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    
+                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>             
                     <YoutubeVideo />
-                </Box>
-                
-                
+                </Box>         
             </CardContent>
         </Card>
     </Container> 
@@ -148,22 +120,51 @@ function UploadImageFooter() {
     )
 }
 
-const YoutubeVideo = (props) => {
+const YoutubeVideo = () => {
     const onReady = (event) => {
         // access to player in all event handlers via event.target
         event.target.pauseVideo();
       };
 
+      const [searchParam, setParam] = useState({})
+      useEffect(() => {
+        
+        const getParams = ()=> {
+            const urlParams = new URLSearchParams(window.location.search);
+            let params = {};
+
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+
+            
+            return params;
+        }
+
+        const param = getParams();
+        setParam(param);
+        
+      }, [])
     const opts = {
         width: '400',
         playerVars: {
           autoplay: 0,
         },
       };
-      return( 
-          <Youtbe videoId="BXR98NlZXwo" opts={opts} onReady={onReady}/>
 
-      )
+    function showUI() {
+        console.log(`the search Params are ${searchParam}`)
+        if(Object.keys(searchParam).length == 0){
+            return <Typography variant="h3">Hello World</Typography>
+        }
+        else{
+            return <Youtbe videoId={searchParam.id} opts={opts} onReady={onReady} />
+        }
+    }
+
+    return(
+        showUI()
+    )
 }
 
 const CustomCarousel = (props) => {

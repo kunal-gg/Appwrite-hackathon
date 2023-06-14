@@ -2,13 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import "./Dashboard.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { account } from "../Config";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
@@ -46,14 +43,10 @@ const Dashboard = (props) => {
     setUserDetails(data);
   };
 
-  const handleLogout = async (e) => {
+  const handleLogout = async () => {
     // e.preventDefault();
-    try {
       await account.deleteSession("current");
       navigate("/login");
-    } catch (error) {
-      toast.error(`${error.message}`);
-    }
   };
 
   useEffect(() => {
