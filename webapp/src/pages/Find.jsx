@@ -8,19 +8,70 @@ import Youtbe from 'react-youtube'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
 
-function checkTab(value){
-    if(value == 0){
-        return <SearchBar />
-    }
-    else if(value == 1) {
-        return <CustomCarousel pictures={null}/>
-    }
-    else{
-        return <Typography variant="h1">Hello world</Typography>
+/**
+ * Method to check tab value to determine the tab content 
+ * @param {number} value The value of the selected tab
+ * @returns {JSX.Element} 
+ */
+const checkTabValue = (value) => {
+    switch(value){
+        case 0: 
+            return <SearchBar />
+        case 1:
+            return <CustomCarousel />
+        case 2:
+            return <CustomCarousel />
     }
 }
+
+/**
+ * Component for rendering the tabs section.
+ * @param {object} props - The component props.
+ * @param {number} props.value - The currently selected tab value.
+ * @param {function} props.handleChange - The function to handle tab value change.
+ * @returns {JSX.Element} - The JSX element representing the tabs section.
+ */
+const TabPanel = ( {value, handleChange } ) => {
+    return (
+        <Paper>
+            <Box sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: 1,
+                paddingX: 2
+
+            }}>
+                <IconButton>
+                    <AccountCircleIcon sx={{fontSize: 30}}/>
+                </IconButton>
+                <div>
+                    <Button variant="outline" startIcon={<WidgetsIcon/>}>
+                        <Typography variant="h5">Dashboard</Typography>
+                    </Button>
+                    <IconButton>
+                        <AccountCircleIcon sx={{fontSize: 30}}/>
+                    </IconButton>
+                </div>
+            </Box>
+        <Tabs value={value} centered onChange={handleChange}>
+            <Tab label={<Typography fontSize={14}>Preview</Typography>}/>
+            <Tab label={<Typography fontSize={14}>Photos</Typography>}/>
+            <Tab label={<Typography fontSize={14}>Results</Typography>}/>
+        </Tabs>
+    </Paper>
+    )
+}
+
+// Specifying the data-type for TablePanel
+TabPanel.propTypes = {
+    value: PropTypes.number.isRequired,
+    handleChange: PropTypes.func.isRequired,
+  };
+  
 
 export default function Find(){
     const [value, setValue] = useState(0);
@@ -35,67 +86,115 @@ export default function Find(){
             flexDirection: "column", 
             justifyContent: "space-between"
         }}>
-            <Paper>
-                <Box sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: 1,
-                    paddingX: 2
-
-                }}>
-                    <IconButton>
-                        <AccountCircleIcon sx={{fontSize: 30}}/>
-                    </IconButton>
-                    <div>
-                        <Button variant="outline" startIcon={<WidgetsIcon/>}>
-                            <Typography variant="h5">Dashboard</Typography>
-                        </Button>
-                        <IconButton>
-                            <AccountCircleIcon sx={{fontSize: 30}}/>
-                        </IconButton>
-                    </div>
-                </Box>
-                <Tabs value={value} centered onChange={handleChange}>
-                    <Tab label={<Typography fontSize={14}>Preview</Typography>}/>
-                    <Tab label={<Typography fontSize={14}>Photos</Typography>}/>
-                    <Tab label={<Typography fontSize={14}>Results</Typography>}/>
-                </Tabs>
-            </Paper>
-        {checkTab(value)}
-        <UploadImageFooter />
+            <TabPanel value={value} handleChange={handleChange}/>
+            {checkTabValue(value)}
+            <UploadImageFooter />
         </Box>
     )
 }
 
-// Making a Custome Search bar
-function SearchBar(props) {
+/**
+ * Renders the Sidebar for pasting URL
+ * @returns {JSX.Element}
+ */
+const SearchBar = () => {
+
+    // State variable to store the youtubeUrl given by the user
+    const [ youtubeUrl, setYoutubeUrl ] = useState(null);
+
+    const changeYoutubeUrl = (event) => {
+        console.log("this is too much")
+        let url = event.target.value;
+        let videoId = url.split('v=')[1]
+        // setting new url
+        setYoutubeUrl(videoId);
+    }
+
     return( 
         <Box sx={{marginY: 3}}>
-        <Container>
-        <Card>
-            <CardHeader title={  
-                <Typography variant="h4" fontWeight="bold">Copy and Paster Your URL here</Typography>
-            }>
-            </CardHeader>
-            <CardContent sx={{display: "flex", flexDirection: "column"}}>
-                <Grid container spacing={2} >
-                    <Grid item xs={11}>
-                        <TextField fullWidth placeholder="https://www.youtube.com/watch?v=BXR98NlZXwo"/>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <CustomButton name="Find" variant="contained" />
-                    </Grid>
-                </Grid >
-                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>             
-                    <YoutubeVideo />
-                </Box>         
-            </CardContent>
-        </Card>
-    </Container> 
+            <Container>
+                <Card>
+                    <CardHeader title={  
+                        <Typography variant="h4" fontWeight="bold">Copy and Paster Your URL here</Typography>
+                    }>
+                    </CardHeader>
+                    <CardContent sx={{display: "flex", flexDirection: "column"}}>
+                        <Grid container spacing={2} >
+                            <Grid item xs={11}>
+                                <TextField fullWidth placeholder="https://www.youtube.com/watch?v=BXR98NlZXwo" onChange={changeYoutubeUrl}/>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <CustomButton name="Find" variant="contained" />
+                            </Grid>
+                        </Grid >
+                        <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>             
+                            {youtubeUrl == null ? <YoutubeVideo youtubeUrlByUser={null} /> : <YoutubeVideo youtubeUrlByUser={youtubeUrl} />}
+                        </Box>         
+                    </CardContent>
+                </Card>
+            </Container> 
         </Box>
     )
 }
+
+const YoutubeVideo = ({youtubeUrlByUser}) => {
+
+    console.log("this is running too many times");
+
+     // state to store the value of the youtube URL
+     const [videoUrl, setVideoUrl] = useState(null);
+     console.log(videoUrl);
+
+      // configuration of the embededYoutubeVideo 
+    const opts = {
+        width: '400',
+        playerVars: {
+          autoplay: 0,
+        },
+      };
+
+      // function to update state depending on typing url
+      if(youtubeUrlByUser != null && youtubeUrlByUser != videoUrl){
+        setVideoUrl(youtubeUrlByUser);
+        console.log(videoUrl)
+      }
+
+      const onReady = (event) => {
+        // access to player in all event handlers via event.target
+        event.target.pauseVideo();
+      };
+
+      const getParams = ()=> {
+        const urlParams = new URLSearchParams(window.location.search);
+        let params = {};
+
+        for (const [key, value] of urlParams) {
+            params[key] = value;
+        }
+
+        return params;
+      }
+      
+      useEffect(() => {
+        const param = getParams();
+        if(Object.keys(param).length != 0){
+            console.log("This is running");
+            setVideoUrl(param.id)
+        }
+      }, [videoUrl])
+
+    return(
+        <Box>
+            {videoUrl == null ? <Typography variant="h3">Hello World</Typography> : <Youtbe videoId={videoUrl} opts={opts} onReady={onReady} />}
+        </Box>
+    )
+}
+
+YoutubeVideo.propTypes = {
+    youtubeUrlByUser: PropTypes.string
+};
+  
+
 
 function UploadImageFooter() {
     return(
@@ -120,52 +219,6 @@ function UploadImageFooter() {
     )
 }
 
-const YoutubeVideo = () => {
-    const onReady = (event) => {
-        // access to player in all event handlers via event.target
-        event.target.pauseVideo();
-      };
-
-      const [searchParam, setParam] = useState({})
-      useEffect(() => {
-        
-        const getParams = ()=> {
-            const urlParams = new URLSearchParams(window.location.search);
-            let params = {};
-
-            for (const [key, value] of urlParams) {
-                params[key] = value;
-            }
-
-            
-            return params;
-        }
-
-        const param = getParams();
-        setParam(param);
-        
-      }, [])
-    const opts = {
-        width: '400',
-        playerVars: {
-          autoplay: 0,
-        },
-      };
-
-    function showUI() {
-        console.log(`the search Params are ${searchParam}`)
-        if(Object.keys(searchParam).length == 0){
-            return <Typography variant="h3">Hello World</Typography>
-        }
-        else{
-            return <Youtbe videoId={searchParam.id} opts={opts} onReady={onReady} />
-        }
-    }
-
-    return(
-        showUI()
-    )
-}
 
 const CustomCarousel = (props) => {
     const { pictures } = props;
