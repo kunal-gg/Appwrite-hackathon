@@ -9,7 +9,35 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect } from "react";
 import PropTypes from 'prop-types';
+import axios from "axios"
 
+// Top Level Main Component For the Page /find
+
+/**
+ * The Results Page
+ * @returns {JSX.Element} 
+ */
+export default function Find(){
+    const [value, setValue] = useState(0);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+      };
+
+    return(
+        <Box sx={{
+            height: "100vh",
+            display: "flex", 
+            flexDirection: "column", 
+            justifyContent: "space-between"
+        }}>
+            <TabPanel value={value} handleChange={handleChange}/>
+            {checkTabValue(value)}
+            <UploadImageFooter />
+        </Box>
+    )
+}
+
+// Children Components
 
 /**
  * Method to check tab value to determine the tab content 
@@ -23,7 +51,7 @@ const checkTabValue = (value) => {
         case 1:
             return <CustomCarousel />
         case 2:
-            return <Typography variant="h1">Hello World</Typography>
+            return <ThirdTabPanel />
     }
 }
 
@@ -71,30 +99,9 @@ TabPanel.propTypes = {
     value: PropTypes.number.isRequired,
     handleChange: PropTypes.func.isRequired,
   };
-  
-
-export default function Find(){
-    const [value, setValue] = useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
-
-    return(
-        <Box sx={{
-            height: "100vh",
-            display: "flex", 
-            flexDirection: "column", 
-            justifyContent: "space-between"
-        }}>
-            <TabPanel value={value} handleChange={handleChange}/>
-            {checkTabValue(value)}
-            <UploadImageFooter />
-        </Box>
-    )
-}
 
 /**
- * Renders the Sidebar for pasting URL
+ * SearchBar for posting URL
  * @returns {JSX.Element}
  */
 const SearchBar = () => {
@@ -110,6 +117,19 @@ const SearchBar = () => {
         setYoutubeUrl(videoId);
     }
 
+    // Fetch the  preview for the given video
+    const fetchImagePreview = async () => {
+        console.log("this preview ran");
+        const response = await axios.post("https://appwrite.rohitkori.tech/api/preview/", {
+          link: "https://www.youtube.com/watch?v=X3jw1JVNdPE",
+          timestamp: 50,
+        });
+        if (response.status === 200) {
+          console.log(response.data);
+        } else {
+          console.log("error");
+        }
+      };
     return( 
         <Box sx={{marginY: 3}}>
             <Container>
@@ -124,11 +144,11 @@ const SearchBar = () => {
                                 <TextField fullWidth placeholder="https://www.youtube.com/watch?v=BXR98NlZXwo" onChange={changeYoutubeUrl}/>
                             </Grid>
                             <Grid item xs={1}>
-                                <CustomButton name="Find" variant="contained" />
+                                <CustomButton name="Find" variant="contained" handleClick={fetchImagePreview}/>
                             </Grid>
                         </Grid >
                         <Box sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>             
-                            {youtubeUrl == null ? <YoutubeVideo youtubeUrlByUser={null} /> : <YoutubeVideo youtubeUrlByUser={youtubeUrl} />}
+                            {youtubeUrl == null ? <EmbeddedYoutubeVideo youtubeUrlByUser={null} /> : <EmbeddedYoutubeVideo youtubeUrlByUser={youtubeUrl} />}
                         </Box>         
                     </CardContent>
                 </Card>
@@ -137,7 +157,13 @@ const SearchBar = () => {
     )
 }
 
-const YoutubeVideo = ({youtubeUrlByUser}) => {
+/**
+ * Embedded Youtube video Component
+ * @param {Object} param0 Contains the videoID entered by the user (without the extension)
+ * @returns {JSX.Element}
+ */
+
+const EmbeddedYoutubeVideo = ({youtubeUrlByUser}) => {
 
     console.log("this is running too many times");
 
@@ -154,17 +180,17 @@ const YoutubeVideo = ({youtubeUrlByUser}) => {
       };
 
       // function to update state depending on typing url
-      if(youtubeUrlByUser != null && youtubeUrlByUser != videoUrl){
+    if(youtubeUrlByUser != null && youtubeUrlByUser != videoUrl){
         setVideoUrl(youtubeUrlByUser);
         console.log(videoUrl)
-      }
+    }
 
-      const onReady = (event) => {
+    const onReady = (event) => {
         // access to player in all event handlers via event.target
         event.target.pauseVideo();
-      };
+    };
 
-      const getParams = ()=> {
+    const getParams = ()=> {
         const urlParams = new URLSearchParams(window.location.search);
         let params = {};
 
@@ -173,28 +199,30 @@ const YoutubeVideo = ({youtubeUrlByUser}) => {
         }
 
         return params;
-      }
+    }
       
-      useEffect(() => {
+    useEffect(() => {
         const param = getParams();
         if(Object.keys(param).length != 0){
             console.log("This is running");
             setVideoUrl(param.id)
         }
-      }, [videoUrl])
+    }, [videoUrl])
 
     return(
         <Box>
-            {videoUrl == null ? <Typography variant="h3">Hello World</Typography> : <Youtbe videoId={videoUrl} opts={opts} onReady={onReady} />}
+            {videoUrl == null ? <NoMediaFoundBanner /> : <Youtbe videoId={videoUrl} opts={opts} onReady={onReady} />}
         </Box>
     )
 }
 
-YoutubeVideo.propTypes = {
+EmbeddedYoutubeVideo.propTypes = {
     youtubeUrlByUser: PropTypes.string
 };
   
 
+
+// Still shit code
 
 function UploadImageFooter() {
     return(
@@ -220,27 +248,106 @@ function UploadImageFooter() {
 }
 
 
-const CustomCarousel = (props) => {
-    const { pictures } = props;
-    console.log(pictures)
+const CustomCarousel = () => {
+
+    // state storing the list of cropped image
+
+    // fetching the pictures from an imgur link
+    const fetchPartsfromImage = async () => {
+
+        const data = {
+            image_link: "https://images-eu.ssl-images-amazon.com/images/I/61UXD0fkrrL._AC_UL600_SR600,600_.jpg"
+        }
+
+        let response = await fetch(
+            "https://appwrite.rohitkori.tech/api/crop/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        )
+
+        response = await response.json();
+        console.log(response);
+    }
+
+    useEffect(() => {
+        fetchPartsfromImage()
+    }, [])
+
+    let pictures = null
 
     return(
-        pictures == null ? <Container maxWidth="sm">
-            <Paper>
-            <img src="https://i.postimg.cc/gkrpf28s/image-removebg-preview-2.png" height={350} />
-            </Paper>
-        </Container> :
+        pictures == null ? <NoMediaFoundBanner /> :
         <Container maxWidth="sm" sx={{marginY: 2}}>
             <Carousel>
-                <Card sx={{height: "60vh"}}>
-                    <CardHeader title="Hello World" />
-                    <CardContent>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit doloribus, alias nulla ratione nisi vel perspiciatis quos autem eligendi voluptas!</CardContent>
-                    <CardActions />
-                </Card>
-                <Card></Card>
-                <Card></Card>
+                {pictures.map(() => {
+                    <Card>
+                        <CardHeader title="Hello World" />
+                    </Card>
+                })}
             </Carousel>
         </Container>
 
+    )
+}
+
+/**
+ * Banner to show absence of media
+ * @returns {JSX.Element}
+ */
+const NoMediaFoundBanner = () => {
+    return(
+        <Container maxWidth="sm">
+            <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                <img src="https://i.postimg.cc/gkrpf28s/image-removebg-preview-2.png" height={350} />
+                <Typography variant="subtitle1" color="GrayText">No Media Found</Typography>
+            </Box>
+        </Container>
+    )
+}
+
+// final Tab Panel
+const ThirdTabPanel = () => {
+
+    const backendUrl = "http://appwrite.rohitkori.tech/api/googlelens/"
+
+    const data = {
+        image_link: "https://images-eu.ssl-images-amazon.com/images/I/61UXD0fkrrL._AC_UL600_SR600,600_.jpg"
+    }
+
+    const fetchFinalResult = async () => {
+        try {
+            const result = await fetch(  
+                backendUrl,
+                {
+                    method: "POST", 
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+            )
+    
+            const resultJson = await result.json()
+            console.log(resultJson)
+            
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    useEffect(() => {
+        console.log("this is running like jackshit")
+        fetchFinalResult();
+    }, [])
+
+
+    return( 
+        <Typography variant="h1" >Hello World </Typography>
     )
 }

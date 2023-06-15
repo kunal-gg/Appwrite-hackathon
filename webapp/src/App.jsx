@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Find from "./pages/Find";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { deepOrange } from "@mui/material/colors";
 
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
   
   const darktheme = createTheme({
     palette: {
-      mode: 'dark', // Set the theme mode to dark
-    },
+      mode: 'dark',
+    }
   });
 
   return (

@@ -10,15 +10,9 @@ import { account }from "../Config"
 
 export default function LandingPage(){
 
-  const darktheme = createTheme({
-    palette: {
-      mode: 'dark', // Set the theme mode to dark
-    },
-  });
-
   return (
-    <ThemeProvider theme={darktheme} >
-      <CssBaseline /> 
+    <main>
+
       <Navbar />
       <Box 
         sx={{
@@ -29,11 +23,10 @@ export default function LandingPage(){
         }}
       >
         <Container>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} justifyContent="space-between" alignItems="center">
             <Grid item xs={6}>
-              <Typography variant="h2" component="h1" fontWeight="bold">Image Search</Typography>
-              <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom={true}>At the Click of a Button</Typography>
-              <Typography color="textSecondary" variant="h5" component="h2"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam provident hic qui ipsa excepturi neque ea itaque ut reiciendis ratione. Molestias possimus consequuntur tenetur fugit ex veniam optio ipsa. </Typography>
+              <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom={true}>Discover Products In Motion</Typography>
+              <Typography color="textSecondary" variant="h5" component="h2"> Revolutionary platform seamlessly matches videos with related products, leveraging AI for personalized shopping experiences. Discover, shop, and be inspired! </Typography>
               <Box sx={{
                 padding: 2
               }}></Box>
@@ -57,7 +50,7 @@ export default function LandingPage(){
       <Options />
       <Footer />
       <FinalFooter />
-    </ThemeProvider>
+                </main>
   )
 }
 
@@ -114,8 +107,13 @@ function Navbar() {
 
   return(
     <Box sx={{
+      position: "fixed", 
+      top: 0,
+      width: "100vw",
       display: "flex",
-      padding: 4,
+      paddingX: 10,
+      paddingY: 3,
+      background:   " rgba(18, 18, 18)",
       justifyContent: "space-between"
     }}>
       <img src="https://i.postimg.cc/6pJDpfGc/Logo.png" alt="" width={50} />
@@ -135,10 +133,10 @@ function Navbar() {
 
 export function CustomButton(props) {
 
-  const {variant , name} = props
+  const {variant , name, handleClick} = props
 
   return (
-  <Button  variant={variant} color="primary" size="large">
+  <Button  variant={variant} color="primary" size="large" onClick={handleClick}>
     <Typography variant="button" fontWeight="bold" fontSize={15} >{name}</Typography>
   </Button>
   )
