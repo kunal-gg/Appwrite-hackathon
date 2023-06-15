@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .utils import downloadVideo, getVideoFrames, hostImage, deleteVideo, googleLensOnAppwrite, cropImage
-
+import json
 
 class PreviewView(APIView):
 
@@ -31,5 +31,12 @@ class GoogleLensView(APIView):
     def post(self,request,*args,**kwargs):
         image_link = request.data['image_link']
         visual_matches = googleLensOnAppwrite(image_link)
-        return Response({'visual_matches': visual_matches})
+        results = json.loads(visual_matches["response"])
+        results = results["areDevelopersAwesome"]
+        final_result = [results[0]]
+        for result in results:
+            if result["source"] == "amazon.com":
+                final_result.append(result)
+
+        return Response({'visual_matches': final_result})
     
