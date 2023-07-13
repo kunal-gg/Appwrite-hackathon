@@ -1,12 +1,14 @@
-import { Box, Button, Card, Container, CssBaseline, Grid, Typography, CardHeader, CardContent, Avatar, CardActions} from "@mui/material";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { FaUser } from 'react-icons/fa';
+import { Box, Button, Card, Container, Grid, Typography, CardHeader, CardContent, Avatar, CardActions} from "@mui/material";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import ExtensionIcon from '@mui/icons-material/Extension';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import  GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom"
 import { account }from "../Config"
+import { string } from "prop-types";
 
 export default function LandingPage(){
 
@@ -62,12 +64,12 @@ function Options() {
       }}
     >
       <Container sx={{height: "100%", display: "flex", flexDirection: "column"}}>
-        <Typography variant="h3" component="h3" align="center" gutterBottom={true}>Why use Name</Typography>
-        <Typography variant="subtitle1"fontSize={16} align="center" color="textSecondary" gutterBottom={true}>Explore the features of Popwola that make it the ultimate no-code popup builder</Typography>
+        <Typography variant="h3" component="h3" align="center" gutterBottom={true}>Why Use StyleLens</Typography>
+        <Typography variant="subtitle1"fontSize={16} align="center" color="textSecondary" gutterBottom={true}>Explore the rich features of Style Lens, the simplest image search in the market</Typography>
         <Grid container spacing={5} sx={{marginY: 1}}>
-          <CustomCard />
-          <CustomCard />
-          <CustomCard />
+          <CustomCard icon = {<PsychologyIcon color="primary"/>} header="Innovative" content="Style Lens revolutionizes the way you shop online by harnessng AI to find the exact products you see in Youtube Videos"/>
+          <CustomCard icon={<HourglassTopIcon color="primary"/>} header="Time Saving" content="Discover and shop your favorite itmes effortlessly with style lens, eliminating the need for extensive searching or guesswork"/>
+          <CustomCard icon={< ExtensionIcon color="primary"/>}header="Seamless" content="Experience a Seamless integration between video content and online shopping with style lens, ensuring a hassle free and efficient shopping experience"/>
         </Grid>
       </Container>
     </Box>
@@ -75,28 +77,33 @@ function Options() {
 }
 
 // making the custom card component
-function CustomCard() {
+function CustomCard(props) {
   return(
     <Grid item xs={4}>
       <Card >
         <CardHeader title={
           <Typography variant="h6" fontSize={18} fontWeight="bold">
-            My Card
+            {props.header}
           </Typography>
         }avatar={
           <Avatar>
-            <FaUser />
+            {props.icon}
           </Avatar>
           }
         />
         <CardContent>
           <Typography variant="body1" fontSize={12} color="textSecondary" >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus saepe odio laudantium nostrum dignissimos maiores magnam aliquid accusantium totam?
+              {props.content} 
           </Typography>
         </CardContent>
       </Card>
     </Grid>
   )
+}
+
+CustomCard.propTypes = {
+  header: string,
+  content: string,
 }
 
 function Navbar() {
@@ -149,8 +156,8 @@ const Footer = ()=> {
       <Grid container sx={{height: "100%"}}>
         <Grid item xs={6} sx={{display: "flex", flexDirection: "column", justifyContent: "start"}}>
           <Typography variant="h6" component="h6" gutterBottom={true}>Start Now</Typography>
-          <Typography variant="h3" component="h3" gutterBottom={true}>Lorem ipsum dolor sit.</Typography>
-          <Typography variant="subtitle1" fontSize={16} color="textSecondary" gutterBottom={true}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, temporibus pariatur? Illum reiciendis sequi quos recusandae repellat minima iste ad..</Typography>
+          <Typography variant="h3" component="h3" gutterBottom={true}>Check Our Our Chrome Extension</Typography>
+          <Typography variant="subtitle1" fontSize={16} color="textSecondary" gutterBottom={true}>Enhance your productivity and unleash the full potential of your browser with our feature-rich Chrome extension. Experience a new level of convenience and efficiency while exploring the web</Typography>
           <Box sx={{marginY: 2}}>
           <CustomButton name="Get Started" variant="contained" />
           <CustomButton name="Get Our Chrome Extension" variant="text" />
@@ -158,23 +165,22 @@ const Footer = ()=> {
         </Grid>
         <Grid item xs={6}>
           <Box sx={{display: "flex", }}>
-
           <Card sx={{marginX: 1}}>
-            <CardHeader title="Subscribe to our newsletter" />
+            <CardHeader title="Read Our blog" />
             <CardContent>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
+              Unveil the secrets behind our website's creation through our insightful blog. Gain a deeper understanding of the thought process and challenges
             </CardContent>
             <CardActions>
-              <Button variant="text" color="primary">Learn More</Button>
+              <Button variant="text" color="primary">Read Blog</Button>
             </CardActions>
           </Card>
           <Card sx={{marginX: 1}}>
-            <CardHeader title="Subscribe to our newsletter" />
+            <CardHeader title="Follow Us On Discord" />
             <CardContent>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam odio saepe ea ipsa in alias labore libero similique delectus.
+              Tech enthusiasts unite! Join our vibrant community, collaborate on innovative projects, and unlock endless possibilities for growth and success.
             </CardContent>
             <CardActions>
-              <Button variant="text" color="primary">Learn More</Button>
+              <Button variant="text" color="primary">Join Discord</Button>
             </CardActions>
           </Card>
           </Box>
@@ -184,18 +190,20 @@ const Footer = ()=> {
   )
 }
 
+
+
 const FinalFooter = ()=>{
   return(
       <Container>
     <Box sx={{height:"10vh", display: "flex", justifyContent:"space-between", alignItems: "center", borderTop: "1px solid white"}}>
           <Typography fontSize={15} variant="body">Copyright 2023</Typography>
           <Box>
-          <Grid container spacing={2}>
-            <Grid item ><InstagramIcon fontSize="large"/></Grid>
-            <Grid item><GitHubIcon fontSize="large"/></Grid>
-            <Grid item><TwitterIcon fontSize="large"/></Grid>
-            <Grid item><LinkedInIcon fontSize="large"/></Grid>
-          </Grid>
+            <Grid container spacing={2}>
+              <Grid item ><InstagramIcon fontSize="large"/></Grid>
+              <Grid item><GitHubIcon fontSize="large"/></Grid>
+              <Grid item><TwitterIcon fontSize="large"/></Grid>
+              <Grid item><LinkedInIcon fontSize="large"/></Grid>
+            </Grid>
           </Box>
 
     </Box>
